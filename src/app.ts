@@ -1,10 +1,37 @@
 class Department {
-  name: string;
+  // private id: string;
+  // private name: string;
+  private employees: string[] = [];
 
-  constructor(n: string) {
-    this.name = n;
+  constructor(private readonly id: string, public name: string) {
+    // this.id = id;
+    // this.name = n;
+  }
+
+  describe(this: Department) {
+    console.log(`Department: ${this.id}: ${this.name}`);
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
   }
 }
 
-const accounting = new Department("Accounting");
-console.log(accounting);
+class ITDepartment extends Department {}
+
+const accounting = new ITDepartment("d1", "Accounting");
+
+accounting.addEmployee("Max");
+accounting.addEmployee("Karol");
+
+accounting.describe();
+accounting.printEmployeeInformation();
+
+// const accountingCopy = { name: "Dummy", describe: accounting.describe };
+
+// accountingCopy.describe();
