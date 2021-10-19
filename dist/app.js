@@ -1,2 +1,6 @@
 "use strict";
-var karol = "Karol";
+var e1 = {
+    name: "Karol",
+    privileges: ["create-server"],
+    startDate: new Date(),
+};
