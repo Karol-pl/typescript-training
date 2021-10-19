@@ -1,5 +1,4 @@
 "use strict";
-var _a;
 var e1 = {
     name: "Karol",
     privileges: ["create-server"],
@@ -18,7 +17,7 @@ var fetchedUserData = {
     name: "Karol",
     // job: { title: "CEO", description: "Self employed" },
 };
-console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+// console.log(fetchedUserData?.job?.title);
 var userInput = "";
 var storedData = userInput !== null && userInput !== void 0 ? userInput : "DEFAULT";
 console.log(storedData);

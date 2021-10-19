@@ -39,7 +39,7 @@ const fetchedUserData = {
   // job: { title: "CEO", description: "Self employed" },
 };
 
-console.log(fetchedUserData?.job?.title);
+// console.log(fetchedUserData?.job?.title);
 
 const userInput = "";
 
