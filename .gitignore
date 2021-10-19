@@ -1,3 +1,7 @@
-# deoendencies
-node_modules/
 
+# deopndencies
+/node_modules
+
+# dependencies
+
+node_modules/
