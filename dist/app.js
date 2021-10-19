@@ -19,6 +19,9 @@ var fetchedUserData = {
     // job: { title: "CEO", description: "Self employed" },
 };
 console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+var userInput = "";
+var storedData = userInput !== null && userInput !== void 0 ? userInput : "DEFAULT";
+console.log(storedData);
 // type UnknownEmployee = Employee | Admin;
 // function printEmployeeInfo(emp: UnknownEmployee) {
 //   console.log("Name: " + emp.name);
