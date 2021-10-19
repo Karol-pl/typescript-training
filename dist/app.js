@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 var e1 = {
     name: "Karol",
     privileges: ["create-server"],
@@ -12,6 +13,12 @@ function add(a, b) {
 }
 var result = add("Karol", "Homziuk");
 result.split(" ");
+var fetchedUserData = {
+    id: "u1",
+    name: "Karol",
+    // job: { title: "CEO", description: "Self employed" },
+};
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
 // type UnknownEmployee = Employee | Admin;
 // function printEmployeeInfo(emp: UnknownEmployee) {
 //   console.log("Name: " + emp.name);
