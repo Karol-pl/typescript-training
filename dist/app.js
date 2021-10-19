@@ -7,10 +7,17 @@ add = function (n1, n2) {
 var Person = /** @class */ (function () {
     function Person(n) {
         this.age = 28;
-        this.name = n;
+        if (n) {
+            this.name = n;
+        }
     }
     Person.prototype.greet = function (phrase) {
-        console.log(phrase + " " + this.name);
+        if (this.name) {
+            console.log(phrase + " " + this.name);
+        }
+        else {
+            console.log("Hi!");
+        }
     };
     return Person;
 }());
