@@ -50,9 +50,12 @@ textStorage.addItem("Karol");
 textStorage.addItem("Max");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
-// const numberStorage = new DataStorage<number>();
-// const objStorage = new DataStorage<object>();
-// objStorage.addItem({ name: "Karol" });
-// objStorage.addItem({ name: "Max" });
-// objStorage.removeItem({ name: "Karol" });
-// console.log(objStorage.getItems());
+function createCourseGoal(title, description, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+const names = ["Karol", "Sports"];
+// names.push("Programmer");
