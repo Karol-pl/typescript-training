@@ -15,14 +15,20 @@ function Logger(logString) {
     };
 }
 function WithTemplate(template, hookId) {
-    return function (constructor) {
-        console.log("Rendering template");
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    console.log("TEMPLATE FACTORY");
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(...args) {
+                super();
+                console.log("Rendering template");
+                const hookEl = document.getElementById(hookId);
+                const p = new originalConstructor();
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 // @Logger("LOGGING - PERSON")
@@ -35,8 +41,8 @@ let Person = class Person {
 Person = __decorate([
     WithTemplate("<h1>My person object</h1>", "app")
 ], Person);
-const pers = new Person();
-console.log(pers);
+// const pers = new Person();
+// console.log(pers);
 // ----
 function Log(target, propertyName) {
     console.log("Property decorator!");
