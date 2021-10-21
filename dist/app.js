@@ -41,8 +41,8 @@ let Person = class Person {
 Person = __decorate([
     WithTemplate("<h1>My person object</h1>", "app")
 ], Person);
-// const pers = new Person();
-// console.log(pers);
+const pers = new Person();
+console.log(pers);
 // ----
 function Log(target, propertyName) {
     console.log("Property decorator!");
