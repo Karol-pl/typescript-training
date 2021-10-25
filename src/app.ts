@@ -94,3 +94,28 @@ class Product {
 
 const p1 = new Product("Book", 20);
 const p2 = new Product("Shoes", 100);
+
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMetod = descriptor.value;
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMetod.bind(this);
+      return boundFn;
+    },
+  };
+  return adjDescriptor;
+}
+
+class Printer {
+  message = "this works";
+  @Autobind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+const p = new Printer();
+
+const button = document.querySelector("button")!;
+button.addEventListener("click", p.showMessage);

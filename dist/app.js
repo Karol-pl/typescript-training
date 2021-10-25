@@ -95,3 +95,29 @@ __decorate([
 ], Product.prototype, "getPriceWithTax", null);
 const p1 = new Product("Book", 20);
 const p2 = new Product("Shoes", 100);
+function Autobind(_, _2, descriptor) {
+    const originalMetod = descriptor.value;
+    const adjDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMetod.bind(this);
+            return boundFn;
+        },
+    };
+    return adjDescriptor;
+}
+class Printer {
+    constructor() {
+        this.message = "this works";
+    }
+    showMessage() {
+        console.log(this.message);
+    }
+}
+__decorate([
+    Autobind
+], Printer.prototype, "showMessage", null);
+const p = new Printer();
+const button = document.querySelector("button");
+button.addEventListener("click", p.showMessage);
