@@ -121,3 +121,31 @@ __decorate([
 const p = new Printer();
 const button = document.querySelector("button");
 button.addEventListener("click", p.showMessage);
+function Required() { }
+function PositiveNumber() { }
+function validate(obj) { }
+class Course {
+    constructor(t, p) {
+        this.title = t;
+        this.price = p;
+    }
+}
+__decorate([
+    Required
+], Course.prototype, "title", void 0);
+__decorate([
+    PositiveNumber
+], Course.prototype, "price", void 0);
+const courseForm = document.querySelector("form");
+courseForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const titleEl = document.getElementById("title");
+    const priceEl = document.getElementById("price");
+    const title = titleEl.value;
+    const price = +priceEl.value;
+    const createdCourse = new Course(title, price);
+    if (validate(createdCourse)) {
+        alert("Invalid input, try again");
+    }
+    console.log(createdCourse);
+});
