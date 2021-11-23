@@ -47,7 +47,7 @@ class ProjectState extends State {
     }
     moveProject(projectId, newStatus) {
         const project = this.projects.find((prj) => prj.id === projectId);
-        if (project) {
+        if (project && project.status !== newStatus) {
             project.status = newStatus;
             this.updateListeners();
         }
@@ -67,39 +67,39 @@ function validate(validatableInput) {
     if (validatableInput.minLength != null &&
         typeof validatableInput.value === "string") {
         isValid =
-            isValid && validatableInput.value.length > validatableInput.minLength;
+            isValid && validatableInput.value.length >= validatableInput.minLength;
     }
     if (validatableInput.maxLength != null &&
         typeof validatableInput.value === "string") {
         isValid =
-            isValid && validatableInput.value.length < validatableInput.maxLength;
+            isValid && validatableInput.value.length <= validatableInput.maxLength;
     }
     if (validatableInput.min != null &&
         typeof validatableInput.value === "number") {
-        isValid = isValid && validatableInput.value > validatableInput.min;
+        isValid = isValid && validatableInput.value >= validatableInput.min;
     }
     if (validatableInput.max != null &&
         typeof validatableInput.value === "number") {
-        isValid = isValid && validatableInput.value < validatableInput.max;
+        isValid = isValid && validatableInput.value <= validatableInput.max;
     }
     return isValid;
 }
 // autobind decorator
 function autobind(target, methodName, descriptor) {
     const originalMethod = descriptor.value;
-    const adjustedDescriptor = {
+    const adjDescriptor = {
         configurable: true,
         get() {
             const boundFn = originalMethod.bind(this);
             return boundFn;
         },
     };
-    return adjustedDescriptor;
+    return adjDescriptor;
 }
 // Component Base Class
 class Component {
     constructor(templateId, hostElementId, insertAtStart, newElementId) {
-        this.templateElement = document.getElementById("project-list");
+        this.templateElement = document.getElementById(templateId);
         this.hostElement = document.getElementById(hostElementId);
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild;
@@ -216,10 +216,9 @@ class ProjectInput extends Component {
         this.descriptionInputElement = this.element.querySelector("#description");
         this.peopleInputElement = this.element.querySelector("#people");
         this.configure();
-        this.renderContent();
     }
     configure() {
-        this.element.addEventListener("submit", this.submitHandler.bind(this));
+        this.element.addEventListener("submit", this.submitHandler);
     }
     renderContent() { }
     gatherUserInput() {
@@ -239,10 +238,11 @@ class ProjectInput extends Component {
             value: enteredPeople,
             required: true,
             min: 1,
+            max: 5,
         };
-        if (validate(titleValidatable) &&
-            validate(descriptionValidatable) &&
-            validate(peopleValidatable)) {
+        if (!validate(titleValidatable) ||
+            !validate(descriptionValidatable) ||
+            !validate(peopleValidatable)) {
             alert("Invalid input, please try again");
             return;
         }
